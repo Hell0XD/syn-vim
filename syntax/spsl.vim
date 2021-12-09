@@ -26,6 +26,12 @@ syn match langDeclareFunction "[a-zA-Z]\+" contained
 syn keyword langDefn defn skipwhite nextgroup=langDeclareFunction
 syn keyword langKeyword if def lambda do mod
 
+syn match langBracket "(" skipwhite nextgroup=langCallFunction
+syn match langCallFunction "[^(defn)][a-zA-Z]\+" contained
+
+hi def link langCallFunction Function
+
+
 " Highlighting
 hi def link langKeyword Keyword
 hi def link langDefn Keyword
