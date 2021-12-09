@@ -19,17 +19,19 @@ syntax match InterpolatedString "\v\w+(\(\))?" contained containedin=Interpolate
 " Operators
 syntax match langOperator "[+-/*=><]"
 
-" Function Def
-syn match langDeclareFunction "[a-zA-Z]\+" contained 
 
-" Keywords
-syn keyword langDefn defn skipwhite nextgroup=langDeclareFunction
-syn keyword langKeyword if def lambda do mod
+### ### ###
 
-syn match langBracket "(" skipwhite nextgroup=langCallFunction
-syn match langCallFunction "[^(defn)][a-zA-Z]\+" contained
+syn match langOpeningBracket "(" skipwhite nextgroup=langDefn,langKeyword,langCallFunction
 
-hi def link langCallFunction Function
+syn keyword langDefn defn skipwhite contained nextgroup=langDeclareFunction
+
+syn keyword langKeyword if def lambda do contained
+
+syn match langDeclareFunction "[a-zA-Z]\+" contained
+
+syn match langCallFunction "[a-zA-Z]\+" contained
+
 
 
 " Highlighting
@@ -40,5 +42,8 @@ hi def link langNumber Number
 hi def link langString String
 hi def link langOperator Operator
 hi def link langComment Comment
+
 hi def link langDeclareFunction Function
+hi def link langCallFunction Function
+
 hi def link langAtom Boolean
